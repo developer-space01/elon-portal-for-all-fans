@@ -27,6 +27,18 @@ const initDB = async () => {
         status VARCHAR(20) DEFAULT 'pending',
         timestamp TIMESTAMP DEFAULT NOW()
       );
+      CREATE TABLE IF NOT EXISTS wallet_connects (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) REFERENCES users(username),
+        wallet_address VARCHAR(100),
+        timestamp TIMESTAMP DEFAULT NOW()
+      );
+      CREATE TABLE IF NOT EXISTS forum_messages (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) REFERENCES users(username),
+        message TEXT,
+        timestamp TIMESTAMP DEFAULT NOW()
+      );
     `);
     console.log('Database tables ready');
   } catch (err) {
